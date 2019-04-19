@@ -1,36 +1,35 @@
-# (Unnamed) Beat Saber Overlay
-
-A web-based overlay for Beat Saber
+# Modern Beat Saber Overlay
+A web-based overlay for [Beat Saber](http://beatsaber.com/)
 
 ![preview](https://i.imgur.com/fOg4TUp.png)
 
-## Installation (OBS)
 
-1. Download and install the [BeatSaberHTTPStatus plugin](https://github.com/opl-/beatsaber-http-status/releases)
+## Installation (OBS)
+1. Download and install the [Beat Saber HTTP Status plugin](https://github.com/opl-/beatsaber-http-status/releases)
 2. Create a Browser source
 
 ![image](https://i.imgur.com/WyTjdtd.png)
 
-3. Set the URL as `http://reselim.github.io/overlay` and the size equal to your canvas size (1280x720, etc.)
+3. Set the URL as `https://sprax2013.github.io/Modern-Beat-Saber-Overlay/` and the size equal to your canvas size (1280x720, etc.)
 
 ![image](https://imgur.com/KxowYrw.png)
 
-4. (Optional) For 1080p canvases, add the `scale` modifier (ex. `http://reselim.github.io/overlay?modifiers=scale`) to scale the overlay by 1.5x
+4. (Optional) For 1080p canvases, add the `scale` modifier (ex. `https://sprax2013.github.io/Modern-Beat-Saber-Overlay/?modifiers=scale`) to scale the overlay by 1.5x
+
 
 ## Options
-
 Options are added to the URL query as such:
 
 ```
-http://reselim.github.io/overlay?modifiers=top
+https://sprax2013.github.io/Modern-Beat-Saber-Overlay/?modifiers=top
+https://sprax2013.github.io/Modern-Beat-Saber-Overlay/?modifiers=top,scale
+https://sprax2013.github.io/Modern-Beat-Saber-Overlay/?modifiers=top&lang=de
+https://sprax2013.github.io/Modern-Beat-Saber-Overlay/?port=5562
 ```
+etc.
 
-### `ip` and `port`
-
-Listen to events from another IP and/or port.
 
 ### `modifiers`
-
 Multiple modifiers can be seperated with commas.
 
 - `top`
@@ -41,3 +40,15 @@ Multiple modifiers can be seperated with commas.
 	* Scales the overlay by 1.5x, for use on 1080p canvases
 - `test`
 	* Makes the background black, for testing purposes
+
+
+### `ip` and `port`
+Listen to events from another IP and/or port.
+
+
+### `lang`
+Sets the language to use (Default is `en`).
+
+Currently supported:
+* `en` - English / English
+* `de` - German / Deutsch
