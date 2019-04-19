@@ -13,5 +13,8 @@ const lang = function () {
         }
     };
 
-    return SUPPORTED_LANG[query.get('lang')] || SUPPORTED_LANG['en'];
+    let langCode = query.get('lang') || 'en';
+
+    document.documentElement.lang = langCode;
+    return SUPPORTED_LANG[langCode] || SUPPORTED_LANG['en'];
 }();
