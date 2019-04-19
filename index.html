@@ -7,10 +7,19 @@
     <title>Beat Saber Overlay</title>
 
     <link rel="stylesheet" href="style.css">
+    <noscript>
+        <link rel="stylesheet" href="./modifiers/test.css"></noscript>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800" rel="stylesheet">
 </head>
 
 <body>
+    <!-- Show nice text if not connected to Beat Saber -->
+    <div id="status"></div>
+
+    <div id="error" class="hidden msg"></div>
+    <noscript class="msg">Your Browser does not support JavaScript. <a href="http://outdatedbrowser.com"
+            rel="noopener">http://outdatedbrowser.com</a></noscript>
+
     <div id="overlay" class="hidden">
         <div id="performance">
             <div class="performance-group">

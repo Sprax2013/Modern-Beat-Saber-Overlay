@@ -1,8 +1,7 @@
 body {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
 
     color: white;
-    /* background: black; */
 
     margin: 0;
 
@@ -17,6 +16,23 @@ body {
     position: absolute;
     left: 40px;
     bottom: 40px;
+}
+
+#status {
+    opacity: 0;
+    display: none;
+}
+
+.hidden {
+    opacity: 0;
+    display: none;
+}
+
+.msg {
+    padding-top: 5%;
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .subtext {
@@ -202,7 +218,6 @@ body {
 
 #overlay.hidden #beatmap,
 #overlay.hidden #performance>* {
-    opacity: 0;
     transform: translate(0, 15px);
     transition:
         opacity var(--hide),
