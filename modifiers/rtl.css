@@ -1,12 +1,13 @@
 #overlay {
-	direction: rtl;
-	right: 40px;
+    direction: rtl;
+    right: 40px;
 }
 
 #score {
-	transform: translate(2px, 0);
+    transform: translate(2px, 0);
 }
 
-#difficulty, #bpm {
-	direction: ltr;
+#difficulty,
+#bpm {
+    direction: ltr;
 }

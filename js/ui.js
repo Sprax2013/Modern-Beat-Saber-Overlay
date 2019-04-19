@@ -1,155 +1,155 @@
 const ui = (() => {
-	var main = document.getElementById("overlay");
+    var main = document.getElementById("overlay");
 
-	const performance = (() => {
-		var rank = document.getElementById("rank");
-		var percentage = document.getElementById("percentage");
-		var score = document.getElementById("score");
-		var combo = document.getElementById("combo");
+    const performance = (() => {
+        var rank = document.getElementById("rank");
+        var percentage = document.getElementById("percentage");
+        var score = document.getElementById("score");
+        var combo = document.getElementById("combo");
 
-		function format(number) {
-			return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		}
+        function format(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
 
-		return (data) => {
-			score.innerText = format(data.score);
-			combo.innerText = data.combo;
-			rank.innerText = data.rank;
-			percentage.innerText = (data.currentMaxScore > 0 ? (Math.floor((data.score / data.currentMaxScore) * 1000) / 10) : 0) + "%";
-		}
-	})();
+        return (data) => {
+            score.innerText = format(data.score);
+            combo.innerText = data.combo;
+            rank.innerText = data.rank;
+            percentage.innerText = (data.currentMaxScore > 0 ? (Math.floor((data.score / data.currentMaxScore) * 1000) / 10) : 0) + "%";
+        }
+    })();
 
-	const timer = (() => {
-		const radius = 30;
-		const circumference = radius * Math.PI * 2;
+    const timer = (() => {
+        const radius = 30;
+        const circumference = radius * Math.PI * 2;
 
-		var bar = document.getElementById("progress");
-		var text = document.getElementById("progress-text");
+        var bar = document.getElementById("progress");
+        var text = document.getElementById("progress-text");
 
-		var active = false;
+        var active = false;
 
-		var began;
-		var duration;
+        var began;
+        var duration;
 
-		var display;
+        var display;
 
-		function format(time) {
-			var minutes = Math.floor(time / 60);
-			var seconds = time % 60;
+        function format(time) {
+            var minutes = Math.floor(time / 60);
+            var seconds = time % 60;
 
-			if (seconds < 10) {
-				seconds = "0" + seconds;
-			}
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
 
-			return `${minutes}:${seconds}`;
-		}
+            return `${minutes}:${seconds}`;
+        }
 
-		function update(time) {
-			time = time || Date.now();
+        function update(time) {
+            time = time || Date.now();
 
-			var delta = time - began;
+            var delta = time - began;
 
-			var progress = Math.floor(delta / 1000);
-			var percentage = Math.min(delta / duration, 1);
+            var progress = Math.floor(delta / 1000);
+            var percentage = Math.min(delta / duration, 1);
 
-			bar.setAttribute("style", `stroke-dashoffset: ${(1 - percentage) * circumference}px`);
+            bar.setAttribute("style", `stroke-dashoffset: ${(1 - percentage) * circumference}px`);
 
-			// Minor optimization
-			if (progress != display) {
-				display = progress;
-				text.innerText = format(progress);
-			}
-		}
+            // Minor optimization
+            if (progress != display) {
+                display = progress;
+                text.innerText = format(progress);
+            }
+        }
 
-		function loop() {
-			if (active) {
-				update();
-				requestAnimationFrame(loop);
-			}
-		}
+        function loop() {
+            if (active) {
+                update();
+                requestAnimationFrame(loop);
+            }
+        }
 
-		return {
-			start(time, length) {
-				active = true;
-				
-				began = time;
-				duration = length;
+        return {
+            start(time, length) {
+                active = true;
 
-				loop();
-			},
+                began = time;
+                duration = length;
 
-			pause(time) {
-				active = false;
+                loop();
+            },
 
-				update(time);
-			},
+            pause(time) {
+                active = false;
 
-			stop() {
-				active = false;
-				began = undefined;
-				duration = undefined;
-			}
-		}
-	})();
+                update(time);
+            },
 
-	const beatmap = (() => {
-		var cover = document.getElementById("image");
+            stop() {
+                active = false;
+                began = undefined;
+                duration = undefined;
+            }
+        }
+    })();
 
-		var title = document.getElementById("title");
-		var subtitle = document.getElementById("subtitle");
-		var artist = document.getElementById("artist");
+    const beatmap = (() => {
+        var cover = document.getElementById("image");
 
-		var difficulty = document.getElementById("difficulty");
-		var bpm = document.getElementById("bpm");
-		var njs = document.getElementById("njs");
-		
-		function format(number) {
-			if (Number.isNaN(number)) {
-				return "NaN";
-			}
+        var title = document.getElementById("title");
+        var subtitle = document.getElementById("subtitle");
+        var artist = document.getElementById("artist");
 
-			if (Math.floor(number) !== number) {
-				return number.toFixed(2);
-			}
+        var difficulty = document.getElementById("difficulty");
+        var bpm = document.getElementById("bpm");
+        var njs = document.getElementById("njs");
 
-			return number.toString();
-		}
+        function format(number) {
+            if (Number.isNaN(number)) {
+                return "NaN";
+            }
 
-		return (data, time) => {
-			if (data.difficulty === "ExpertPlus") {
-				data.difficulty = "Expert+";
-			}
+            if (Math.floor(number) !== number) {
+                return number.toFixed(2);
+            }
 
-			cover.setAttribute("src", `data:image/png;base64,${data.songCover}`);
+            return number.toString();
+        }
 
-			title.innerText = data.songName;
-			subtitle.innerText = data.songSubName;
-			artist.innerText = data.songAuthorName;
+        return (data, time) => {
+            if (data.difficulty === "ExpertPlus") {
+                data.difficulty = "Expert+";
+            }
 
-			difficulty.innerText = data.difficulty;
-			bpm.innerText = `${format(data.songBPM)} BPM`;
+            cover.setAttribute("src", `data:image/png;base64,${data.songCover}`);
 
-			if (data.noteJumpSpeed) {
-				njs.innerText = `${format(data.noteJumpSpeed)} NJS`;
-			} else {
-				njs.innerText = "";
-			}
+            title.innerText = data.songName;
+            subtitle.innerText = data.songSubName;
+            artist.innerText = data.songAuthorName;
 
-			timer.start(Date.now(), data.length);
-		}
-	})();
+            difficulty.innerText = data.difficulty;
+            bpm.innerText = `${format(data.songBPM)} BPM`;
 
-	return {
-		hide() {
-			main.classList.add("hidden");
-		},
+            if (data.noteJumpSpeed) {
+                njs.innerText = `${format(data.noteJumpSpeed)} NJS`;
+            } else {
+                njs.innerText = "";
+            }
 
-		show() {
-			main.classList.remove("hidden");
-		},
+            timer.start(Date.now(), data.length);
+        }
+    })();
 
-		performance,
-		timer,
-		beatmap
-	}
+    return {
+        hide() {
+            main.classList.add("hidden");
+        },
+
+        show() {
+            main.classList.remove("hidden");
+        },
+
+        performance,
+        timer,
+        beatmap
+    }
 })();
