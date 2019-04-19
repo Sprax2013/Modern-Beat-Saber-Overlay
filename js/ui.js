@@ -1,3 +1,13 @@
+/**
+  * @param {String} str
+  */
+const escapeHTML = function (str) {
+    let temp = document.createElement('div');
+    temp.textContent = str;
+
+    return temp.innerHTML;
+};
+
 const ui = (() => {
     var main = document.getElementById('overlay');
 
@@ -8,12 +18,12 @@ const ui = (() => {
         var combo = document.getElementById('combo');
 
         function format(number) {
-            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, lang.thousandsSeparator);
         }
 
         return (data) => {
-            score.innerText = format(data.score);
-            combo.innerText = data.combo;
+            score.innerHTML = escapeHTML(format(data.score)) + ` <span class="subtext">${lang.points}</span>`;
+            combo.innerHTML = escapeHTML(format(data.combo)) + ` <span class="subtext">${lang.combo}</span>`;
             rank.innerText = data.rank;
             percentage.innerText = (data.currentMaxScore > 0 ? (Math.floor((data.score / data.currentMaxScore) * 1000) / 10) : 0) + '%';
         }
