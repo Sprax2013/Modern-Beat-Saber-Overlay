@@ -1,6 +1,6 @@
 const events = {
     hello(data, time) {
-        console.log("Connected to Beat Saber");
+        console.log('Connected to Beat Saber');
 
         if (data.beatmap && data.performance) {
             ui.beatmap(data.beatmap, time);

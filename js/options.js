@@ -3,11 +3,11 @@ const query = new URLSearchParams(location.search);
 (() => {
     const handlers = {
         modifiers(string) {
-            string.split(",").forEach((modifier) => {
-                var link = document.createElement("link");
+            string.split(',').forEach((modifier) => {
+                var link = document.createElement('link');
 
-                link.setAttribute("rel", "stylesheet");
-                link.setAttribute("href", `./modifiers/${modifier}.css`);
+                link.setAttribute('rel', 'stylesheet');
+                link.setAttribute('href', `./modifiers/${modifier}.css`);
 
                 document.head.appendChild(link);
             });

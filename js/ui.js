@@ -1,21 +1,21 @@
 const ui = (() => {
-    var main = document.getElementById("overlay");
+    var main = document.getElementById('overlay');
 
     const performance = (() => {
-        var rank = document.getElementById("rank");
-        var percentage = document.getElementById("percentage");
-        var score = document.getElementById("score");
-        var combo = document.getElementById("combo");
+        var rank = document.getElementById('rank');
+        var percentage = document.getElementById('percentage');
+        var score = document.getElementById('score');
+        var combo = document.getElementById('combo');
 
         function format(number) {
-            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
 
         return (data) => {
             score.innerText = format(data.score);
             combo.innerText = data.combo;
             rank.innerText = data.rank;
-            percentage.innerText = (data.currentMaxScore > 0 ? (Math.floor((data.score / data.currentMaxScore) * 1000) / 10) : 0) + "%";
+            percentage.innerText = (data.currentMaxScore > 0 ? (Math.floor((data.score / data.currentMaxScore) * 1000) / 10) : 0) + '%';
         }
     })();
 
@@ -23,8 +23,8 @@ const ui = (() => {
         const radius = 30;
         const circumference = radius * Math.PI * 2;
 
-        var bar = document.getElementById("progress");
-        var text = document.getElementById("progress-text");
+        var bar = document.getElementById('progress');
+        var text = document.getElementById('progress-text');
 
         var active = false;
 
@@ -38,7 +38,7 @@ const ui = (() => {
             var seconds = time % 60;
 
             if (seconds < 10) {
-                seconds = "0" + seconds;
+                seconds = '0' + seconds;
             }
 
             return `${minutes}:${seconds}`;
@@ -52,7 +52,7 @@ const ui = (() => {
             var progress = Math.floor(delta / 1000);
             var percentage = Math.min(delta / duration, 1);
 
-            bar.setAttribute("style", `stroke-dashoffset: ${(1 - percentage) * circumference}px`);
+            bar.setAttribute('style', `stroke-dashoffset: ${(1 - percentage) * circumference}px`);
 
             // Minor optimization
             if (progress != display) {
@@ -93,19 +93,19 @@ const ui = (() => {
     })();
 
     const beatmap = (() => {
-        var cover = document.getElementById("image");
+        var cover = document.getElementById('image');
 
-        var title = document.getElementById("title");
-        var subtitle = document.getElementById("subtitle");
-        var artist = document.getElementById("artist");
+        var title = document.getElementById('title');
+        var subtitle = document.getElementById('subtitle');
+        var artist = document.getElementById('artist');
 
-        var difficulty = document.getElementById("difficulty");
-        var bpm = document.getElementById("bpm");
-        var njs = document.getElementById("njs");
+        var difficulty = document.getElementById('difficulty');
+        var bpm = document.getElementById('bpm');
+        var njs = document.getElementById('njs');
 
         function format(number) {
             if (Number.isNaN(number)) {
-                return "NaN";
+                return 'NaN';
             }
 
             if (Math.floor(number) !== number) {
@@ -116,11 +116,11 @@ const ui = (() => {
         }
 
         return (data, time) => {
-            if (data.difficulty === "ExpertPlus") {
-                data.difficulty = "Expert+";
+            if (data.difficulty === 'ExpertPlus') {
+                data.difficulty = 'Expert+';
             }
 
-            cover.setAttribute("src", `data:image/png;base64,${data.songCover}`);
+            cover.setAttribute('src', `data:image/png;base64,${data.songCover}`);
 
             title.innerText = data.songName;
             subtitle.innerText = data.songSubName;
@@ -132,7 +132,7 @@ const ui = (() => {
             if (data.noteJumpSpeed) {
                 njs.innerText = `${format(data.noteJumpSpeed)} NJS`;
             } else {
-                njs.innerText = "";
+                njs.innerText = '';
             }
 
             timer.start(Date.now(), data.length);
@@ -141,11 +141,11 @@ const ui = (() => {
 
     return {
         hide() {
-            main.classList.add("hidden");
+            main.classList.add('hidden');
         },
 
         show() {
-            main.classList.remove("hidden");
+            main.classList.remove('hidden');
         },
 
         performance,
