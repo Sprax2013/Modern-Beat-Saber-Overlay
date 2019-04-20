@@ -1,18 +1,18 @@
 # Modern Beat Saber Overlay
 A web-based overlay for [Beat Saber](http://beatsaber.com/)
 
-![preview](https://i.imgur.com/fOg4TUp.png)
+![preview](https://i.imgur.com/4s8A9En.png)
 
 
 ## Installation (OBS)
 1. Download and install the [Beat Saber HTTP Status plugin](https://github.com/opl-/beatsaber-http-status/releases)
 2. Create a Browser source
 
-![image](https://i.imgur.com/WyTjdtd.png)
+![image](https://i.imgur.com/8YpUqlC.png)
 
 3. Set the URL as `https://sprax2013.github.io/Modern-Beat-Saber-Overlay/` and the size equal to your canvas size (1280x720, etc.)
 
-![image](https://imgur.com/KxowYrw.png)
+![image](https://i.imgur.com/56D9ZCJ.png)
 
 4. (Optional) For 1080p canvases, add the `scale` modifier (ex. `https://sprax2013.github.io/Modern-Beat-Saber-Overlay/?modifiers=scale`) to scale the overlay by 1.5x
 
